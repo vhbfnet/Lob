@@ -133,11 +133,29 @@ namespace Lob.Mvvm.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to List.
+        /// </summary>
+        public static string Label_ListTitle {
+            get {
+                return ResourceManager.GetString("Label_ListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string Label_ViewModelTitle {
             get {
                 return ResourceManager.GetString("Label_ViewModelTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Lable_SearchTitle {
+            get {
+                return ResourceManager.GetString("Lable_SearchTitle", resourceCulture);
             }
         }
         

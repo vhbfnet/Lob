@@ -40,7 +40,8 @@ namespace WpfApp
             {
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-                viewModel.Validate();
+                if (viewModel.IsChanged)
+                    viewModel.Validate();
             }
         }
     }

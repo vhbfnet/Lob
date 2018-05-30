@@ -141,8 +141,14 @@
   <data name="Error_Unhandled" xml:space="preserve">
     <value>An unhandled error has occurred. Please contact technical support.</value>
   </data>
+  <data name="Label_ListTitle" xml:space="preserve">
+    <value>List</value>
+  </data>
   <data name="Label_ViewModelTitle" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="Lable_SearchTitle" xml:space="preserve">
+    <value>Search</value>
   </data>
   <data name="Message_DeleteConfirm" xml:space="preserve">
     <value>Are you sure you want to delete the record : {0}  ?</value>

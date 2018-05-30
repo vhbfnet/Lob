@@ -671,8 +671,12 @@ namespace Lob.Mvvm
         /// <returns>Task</returns>
         protected override async Task Load()
         {
-            AcceptChanges();
             await base.Load();
+        }
+
+        protected override bool CanExecuteRefresh()
+        {
+            return base.CanExecuteRefresh() && !IsChanged;
         }
 
         #endregion

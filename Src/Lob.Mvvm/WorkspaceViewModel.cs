@@ -97,6 +97,69 @@ namespace Lob.Mvvm
 
         #endregion
 
+        #region ViewLoadedCommand
+
+        /// <summary>
+        /// Cette commande doit être appelée depuis la vue sur l'événement Loaded
+        /// </summary>
+        public DelegateCommand ViewLoadedCommand
+        {
+            get { return _viewLoadedCommand ?? (_viewLoadedCommand = new DelegateCommand(ExecuteViewLoaded, CanExecuteViewLoaded)); }
+        }
+        private DelegateCommand _viewLoadedCommand;
+
+        /// <summary>
+        /// Execute la commande <see cref="ViewLoadedCommand"/>
+        /// </summary>
+        protected virtual void ExecuteViewLoaded()
+        {
+            if (!IsViewLoaded)
+                IsViewLoaded = true;
+        }
+
+        /// <summary>
+        /// Determine si la commande <see cref="ViewLoadedCommand"/> peut être executée
+        /// </summary>
+        /// <returns>True ou false</returns>
+        protected virtual bool CanExecuteViewLoaded()
+        {
+            return !IsViewLoaded;
+        }
+
+        #endregion
+
+        #region OnViewLoaded
+
+        /// <summary>
+        /// Indique si la vue est chargé ou pas
+        /// </summary>
+        [IgnoreChange]
+        public bool IsViewLoaded
+        {
+            get { return _isViewLoaded; }
+            set
+            {
+                if (SetProperty(ref _isViewLoaded, value))
+                    OnViewLoaded();
+            }
+        }
+        private bool _isViewLoaded;
+
+        /// <summary>
+        /// Informe que la valeur de la propriété <see cref="IsViewLoaded"/> a changé
+        /// </summary>
+        public event EventHandler ViewLoaded;
+
+        /// <summary>
+        /// Déclenche l'évenement ViewLoaded
+        /// </summary>
+        protected virtual void OnViewLoaded()
+        {
+            ViewLoaded?.Invoke(this, EventArgs.Empty);
+        }
+
+        #endregion
+
         #region OnHeaderChanged
 
         /// <summary>
@@ -242,9 +305,9 @@ namespace Lob.Mvvm
             SetTitle();
             IsBusy = false;
             IsLoading = false;
+            AcceptChanges();
 
-            if (Loaded != null)
-                Loaded(this, operationEventArgs);
+            Loaded?.Invoke(this, operationEventArgs);
         }
 
         /// <summary>
@@ -397,7 +460,7 @@ namespace Lob.Mvvm
         /// <returns>True ou false</returns>
         protected virtual bool CanExecuteRefresh()
         {
-            return !IsBusy && !IsChanged && !ViewModelsIsBusy();
+            return !IsBusy && !ViewModelsIsBusy();
         }
 
         /// <summary>
