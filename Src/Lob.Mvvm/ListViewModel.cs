@@ -109,6 +109,9 @@ namespace Lob.Mvvm
             if (CurrentItem != null && !SelectedItems.Contains(CurrentItem))
                 _selectedItems.Add(CurrentItem);
 
+            if (oldItem != null && SelectedItems.Contains(oldItem))
+                _selectedItems.Remove(oldItem);
+
             CurrentItemChanged?.Invoke(this, new CurrentItemChangedEventArgs(oldItem));
 
             if (oldItem is INotifyPropertyChanged npc)

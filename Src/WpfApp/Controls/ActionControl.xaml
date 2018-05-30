@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="WpfApp.Controls.ActionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp.Controls"
+             mc:Ignorable="d" d:DesignWidth="800">
+
+    <Border Padding="5" BorderBrush="LightGray" BorderThickness="0,0,0,1" CornerRadius="0" Margin="0,0,0,10">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <CheckBox IsChecked="{Binding IsChanged}" Content="Is Changed" VerticalAlignment="Center" Margin="2"/>
+            <Button Command="{Binding DetailCommand}" Content="Detail" Width="80" Height="22" Margin="2"/>
+            <Button Command="{Binding RefreshCommand}" Content="Refresh" Width="80" Height="22" Margin="2"/>
+            <Button x:Name="btnSave" Command="{Binding SaveCommand}" Content="Save" Width="80" Height="22" Margin="2"/>
+            <Button Command="{Binding CancelCommand}" Content="Cancel" Width="80" Height="22" Margin="2"/>
+            <Button Command="{Binding DeleteCommand}" Content="Delete" Width="80" Height="22" Margin="2"/>
+            <ComboBox HorizontalAlignment="Left" Margin="4" Width="60" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem IsSelected="True">fr-FR</ComboBoxItem>
+                <ComboBoxItem>en-US</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+    </Border>
+</UserControl>

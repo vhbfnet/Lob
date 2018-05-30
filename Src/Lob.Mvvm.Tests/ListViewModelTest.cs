@@ -81,5 +81,16 @@ namespace Lob.Mvvm.Tests
             vm.CurrentItem.MyString = "Hugo";
             Assert.IsTrue(itemChanged);
         }
+
+        [TestMethod]
+        public void DetailCommandCurrentItem()
+        {
+            EntityListViewModel vm = new EntityListViewModel();
+            var entity = new Entity();
+            vm.CurrentItem = entity;
+            Assert.IsTrue(vm.DetailCommand.CanExecute());
+            vm.CurrentItem = null;
+            Assert.IsFalse(vm.DetailCommand.CanExecute());
+        }
     }
 }

@@ -5,7 +5,9 @@
              xmlns:converters="clr-namespace:WpfApp.Converters"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:MultiBooleanConverter x:Key="MultiBooleanConverter" />
+
         <Color x:Key="ErrorColor">#DC000C</Color>
         <SolidColorBrush x:Key="Error" Color="{StaticResource ErrorColor}" />
         <Thickness x:Key="BorderThickness">0.7,0.7,0.7,0.7</Thickness>
@@ -105,12 +107,35 @@
             <Setter Property="Margin" Value="4"/>
             <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource ErrorTemplate}"/>
         </Style>
-        
+
         <Style TargetType="Label">
             <Setter Property="Padding" Value="4,4,4,0"/>
             <Setter Property="Margin" Value="0,0,0,0"/>
         </Style>
-        
+
+        <Style TargetType="DataGrid">
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserDeleteRows" Value="False"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="LightGray"/>
+            <Setter Property="VerticalGridLinesBrush" Value="LightGray"/>
+        </Style>
+
+        <Style x:Key="TabViewItemStyle" TargetType="{x:Type TabItem}">
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" DataContext="{Binding Content.DataContext, RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, ValidatesOnNotifyDataErrors=False}">
+                            <!--<Image Height="20" Width="20" Margin="0,0,2,0" Source="{Binding ViewUriIcon, Converter={StaticResource StaticRessourceConverter}}" Style="{StaticResource EmptyUriStyle}" />-->
+                            <TextBlock Margin="4" Text="{Binding ViewTitle}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" MaxWidth="90"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 
 </Application>
