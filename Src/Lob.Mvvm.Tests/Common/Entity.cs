@@ -17,6 +17,13 @@ namespace Lob.Mvvm.Tests.Common
         }
         private int _myInt;
 
+        public string MyString
+        {
+            get { return _myString; }
+            set { SetProperty(ref _myString, value); }
+        }
+        private string _myString;
+
         [Required]
         public string MyRequiredString
         {
