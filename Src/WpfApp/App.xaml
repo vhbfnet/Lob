@@ -4,12 +4,16 @@
              xmlns:local="clr-namespace:WpfApp"
              xmlns:converters="clr-namespace:WpfApp.Converters"
              StartupUri="MainWindow.xaml">
+    
     <Application.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:MultiBooleanConverter x:Key="MultiBooleanConverter" />
+        <converters:StaticRessourceConverter x:Key="StaticRessourceConverter"/>
 
         <Color x:Key="ErrorColor">#DC000C</Color>
+        <Color x:Key="IconBackgroundColor">#000000</Color>
         <SolidColorBrush x:Key="Error" Color="{StaticResource ErrorColor}" />
+        <SolidColorBrush x:Key="IconBackground" Color="{DynamicResource IconBackgroundColor}" />
         <Thickness x:Key="BorderThickness">0.7,0.7,0.7,0.7</Thickness>
 
         <!-- Error template -->
@@ -128,13 +132,79 @@
                 <Setter.Value>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" DataContext="{Binding Content.DataContext, RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, ValidatesOnNotifyDataErrors=False}">
-                            <!--<Image Height="20" Width="20" Margin="0,0,2,0" Source="{Binding ViewUriIcon, Converter={StaticResource StaticRessourceConverter}}" Style="{StaticResource EmptyUriStyle}" />-->
+                            <Image Height="20" Width="20" Margin="0,0,2,0" Source="{Binding ViewUriIcon, Converter={StaticResource StaticRessourceConverter}}" />
                             <TextBlock Margin="4" Text="{Binding ViewTitle}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" MaxWidth="90"/>
                         </StackPanel>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <DrawingImage x:Key="IconDataView">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <DrawingGroup.Children>
+                        <GeometryDrawing Brush="{DynamicResource IconBackground}" Geometry="F1 M 20,17L 44,17L 56,29L 56,59L 20,59L 20,17 Z M 24,21L 24,55L 52,55L 52,34L 39,34L 39,21L 24,21 Z M 43,21L 43,30L 52,30L 43,21 Z">
+                            <GeometryDrawing.Pen>
+                                <Pen Thickness="10" Brush="Transparent"/>
+                            </GeometryDrawing.Pen>
+                        </GeometryDrawing>
+                    </DrawingGroup.Children>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>    
+        <DrawingImage x:Key="IconDataList">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <DrawingGroup.Children>
+                        <GeometryDrawing Brush="{DynamicResource IconBackground}" Geometry="F1 M 19,23L 27,23L 27,31L 19,31L 19,23 Z M 19,34L 27,34L 27,42L 19,42L 19,34 Z M 31,23L 57,23L 57,31L 31,31L 31,23 Z M 19,45L 27,45L 27,53L 19,53L 19,45 Z M 31,34L 57,34L 57,42L 31,42L 31,34 Z M 31,45L 57,45L 57,53L 31,53L 31,45 Z">
+                            <GeometryDrawing.Pen>
+                                <Pen Thickness="5" Brush="Transparent"/>
+                            </GeometryDrawing.Pen>
+                        </GeometryDrawing>
+                    </DrawingGroup.Children>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        <DrawingImage x:Key="IconDataEdit">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <DrawingGroup.Children>
+                        <GeometryDrawing Brush="{DynamicResource IconBackground}" Geometry="F1 M 48,30L 55.75,30L 48,22.25L 48,30 Z M 57,33L 44,33L 44,21L 29,21L 29,31.25L 25,27.25L 25,17L 48.25,17L 61,29.75L 61,59L 25,59L 25,41.75L 29,45.75L 29,55L 57,55L 57,33 Z M 24.5417,28.5L 39.5833,43.5417L 34.0417,49.0833L 19,34.0417L 24.5417,28.5 Z M 17.8125,32.8542L 14.6458,30.314C 13.6303,29.2984 14.0262,27.1405 15.0417,26.125L 16.625,24.5417C 17.6405,23.5262 19.5678,23.1303 20.5833,24.1459L 23.3541,27.3126L 17.8125,32.8542 Z M 41.9715,52.25L 35.2292,50.2709L 40.7708,44.7292L 42.6216,51.5999L 41.9715,52.25 Z">
+                            <GeometryDrawing.Pen>
+                                <Pen Thickness="8" Brush="Transparent" />
+                            </GeometryDrawing.Pen>
+                        </GeometryDrawing>
+                    </DrawingGroup.Children>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        <DrawingImage x:Key="IconDataSearch">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <DrawingGroup.Children>
+                        <GeometryDrawing Brush="{DynamicResource IconBackground}" Geometry="M8.14424701781246,3.05618995722875C7.12007089705441,3.07381576594457 6.09323497862789,3.38365477618321 5.2255420312402,4.0027875333701 3.11227007956478,5.51229089793309 2.74635144324276,8.29055112895116 4.41035743803952,10.2104968458091 6.07324548811886,12.1270875364219 9.13551040739987,12.4595136075889 11.2499112710473,10.9499692350303 13.3643064126489,9.44046396311864 13.729101143789,6.66228717860326 12.0650949105737,4.74234241541966 11.1299295053003,3.66232699450597 9.75211139769528,3.085712137786 8.34899898619625,3.05655592974767 8.28079219908688,3.05513829287633 8.21252533049557,3.05501479205235 8.14424701781246,3.05618995722875z M8.22805114836666,9.13855949136178E-07C10.668668709707,-0.00109195717119093 13.0852698907373,0.978045883742418 14.7117328271386,2.85287398394689 17.0316981896875,5.52926916178807 17.0122623071191,9.19284147318944 14.9277696237085,11.828573170272L21.3330001458642,19.2167548566733 17.8431472405908,21.7100009351645 11.4610843286035,14.3489417463218C8.1207360848901,15.6413831144248 4.11695524306271,14.81031412181 1.76372071356747,12.0999650388633 -1.04924479870823,8.853623333541 -0.43103859572437,4.1554188161765 3.1444131955621,1.60117894705876 4.65327879042599,0.523573818770494 6.44705959410641,0.000798217873345664 8.22805114836666,9.13855949136178E-07z">
+                            <GeometryDrawing.Pen>
+                                <Pen Thickness="2" Brush="Transparent"/>
+                            </GeometryDrawing.Pen>
+                        </GeometryDrawing>
+                    </DrawingGroup.Children>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        <DrawingImage x:Key="IconDataClearSearch">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <DrawingGroup.Children>
+                        <GeometryDrawing Brush="{DynamicResource IconBackground}" Geometry="M41.66254,22.659482L25.770635,39.857334C25.770635,39.857334,36.811951,56.565493,38.182119,59.965517L42.612736,57.395483C42.612736,57.395483 39.402367,51.256006 37.602091,49.706369 37.602091,49.706369 35.921824,47.406813 38.862259,48.246567 38.862259,48.246567 45.593092,53.775755 46.483221,54.386042L50.953758,50.386473C50.953758,50.386473,50.353706,49.00625,49.433546,47.856472L44.162857,41.927423C44.162857,41.927423 43.222797,40.027239 45.313028,40.687323 45.313028,40.687323 50.933735,45.19709 54.564199,46.326853L58.024721,41.617399C58.024721,41.617399 51.56382,35.417871 51.073769,34.248075 51.073769,34.248075 49.943619,33.218402 51.56382,33.027993 51.56382,33.027993 58.164633,37.597813 60.645048,37.377621 60.645048,37.377621 62.745291,33.487905 62.615271,33.168115 62.615271,33.168115 44.783054,24.789135 41.66254,22.659482z M41.102533,17.700056C47.203281,23.049088 63.63542,29.438537 63.63542,29.438537 68.235975,30.528262 66.245733,34.297876 66.245733,34.297876 58.344709,53.076124 39.5623,63.374819 39.5623,63.374819 36.231921,65.69488 34.641754,60.675402 34.641754,60.675402 30.821201,53.056108 21.11001,39.747482 21.11001,39.747482z M3.8394279,0.001115799C4.1157207,-0.011383057,4.3957653,0.081111908,4.615799,0.28110123L22.788616,16.840264C22.978645,17.010256,23.068659,17.230245,23.108666,17.460233L27.129289,13.050456C30.509813,11.170551,33.400261,12.760471,33.400261,12.76047L38.10099,16.170298 18.818001,37.149237 15.457479,32.539471C13.427165,28.299685,15.78753,25.479827,15.787531,25.479827L19.158054,21.780015C18.928017,21.760015,18.707983,21.690019,18.517954,21.520028L0.35513878,4.960865C-0.08493042,4.5608854,-0.12493706,3.8709202,0.28512764,3.4309425L3.0855618,0.35109901C3.2905941,0.13110924,3.5631351,0.013616562,3.8394279,0.001115799z">
+                            <GeometryDrawing.Pen>
+                                <Pen Thickness="10" Brush="Transparent"/>
+                            </GeometryDrawing.Pen>
+                        </GeometryDrawing>
+                    </DrawingGroup.Children>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
 
     </Application.Resources>
 

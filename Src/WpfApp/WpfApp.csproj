@@ -45,6 +45,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -86,8 +87,12 @@
     <Compile Include="Controls\ActionControl.xaml.cs">
       <DependentUpon>ActionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\StaticRessourceConverter.cs" />
     <Compile Include="GlobalCommands.cs" />
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Services\CustomerServiceProvider.cs" />
+    <Compile Include="Services\ICustomerServiceProvider.cs" />
+    <Compile Include="Singleton.cs" />
     <Compile Include="ViewModels\CustomerListViewModel.cs" />
     <Compile Include="Views\CustomerListView.xaml.cs">
       <DependentUpon>CustomerListView.xaml</DependentUpon>
@@ -143,6 +148,9 @@
       <Project>{ec3c09ba-23d5-4360-af3d-b4d95a69c12a}</Project>
       <Name>Lob.Mvvm</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Behaviors\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

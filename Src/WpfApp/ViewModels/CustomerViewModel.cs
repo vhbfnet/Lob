@@ -8,11 +8,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp.Services;
 
 namespace WpfApp.ViewModels
 {
     public class CustomerViewModel : EditableViewModel<Customer>
     {
+        private readonly ICustomerServiceProvider _customerServiceProvider;
+
         [Required]
         public string VmProperty1
         {
@@ -32,34 +35,31 @@ namespace WpfApp.ViewModels
         public CustomerViewModel()
         {
             ViewTitle = "Customer view";
-            LoadCommand.Execute();
+            _customerServiceProvider = Singleton<CustomerServiceProvider>.Instance; // TODO : Inject this by DI
         }
 
         protected async override Task Load()
         {
-            await GetData();
-            await base.Load();
+            await Refresh();
         }
 
         protected async override Task Refresh()
         {
-            await GetData();
+            await GetCustomer();
             await base.Refresh();
         }
 
         protected async override Task Save()
         {
-            await GetData();
+            Model = await _customerServiceProvider.SaveCustomerAsync(Model);
             await base.Save();
         }
 
-        private async Task GetData()
+        private async Task GetCustomer()
         {
-            await Task.Delay(3000);
             VmProperty1 = string.Empty;
             VmProperty2 = string.Empty;
-            Mode = Mode.Edit;
-            Model = new Customer();
+            Model = await _customerServiceProvider.GetCustomerByKeyAsync(1);
         }
     }
 }

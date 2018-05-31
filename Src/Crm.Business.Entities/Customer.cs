@@ -15,6 +15,15 @@ namespace Crm.Business.Entities
     public class Customer : EntityCore<Customer>
     {
         [DataMember]
+        [Key]
+        public int Id
+        {
+            get { return _id; }
+            set { SetProperty(ref _id, value); }
+        }
+        private int _id;
+
+        [DataMember]
         [Required]
         [MinLength(5)]
         [Display(ResourceType = typeof(Resources), Name = "Customer_FirstName")]

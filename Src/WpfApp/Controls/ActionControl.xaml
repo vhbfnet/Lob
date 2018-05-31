@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WpfApp.Controls"
              mc:Ignorable="d" d:DesignWidth="800">
 
-    <Border Padding="5" BorderBrush="LightGray" BorderThickness="0,0,0,1" CornerRadius="0" Margin="0,0,0,10">
+    <Border Padding="5" BorderBrush="#FFE0E0E0" Background="#FFEEEEEE" BorderThickness="0,1,0,1" CornerRadius="0" Margin="0,0,0,10">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <CheckBox IsChecked="{Binding IsChanged}" Content="Is Changed" VerticalAlignment="Center" Margin="2"/>
             <Button Command="{Binding DetailCommand}" Content="Detail" Width="80" Height="22" Margin="2"/>

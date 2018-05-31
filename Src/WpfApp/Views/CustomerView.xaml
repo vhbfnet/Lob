@@ -4,57 +4,67 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:WpfApp.ViewModels"
-             xmlns:uc="clr-namespace:WpfApp.Controls" mc:Ignorable="d"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             mc:Ignorable="d"
              d:DataContext="{d:DesignInstance vm:CustomerViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="600" d:DesignWidth="800">
 
-    <Grid Margin="20,30,20,10">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ViewLoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <AdornerDecorator>
+        <Grid Margin="20,30,20,10">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="190"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="190"/>
+            </Grid.RowDefinitions>
 
-        <GroupBox Grid.Row="0" Header=" ViewModel properties " Padding="5" Margin="0,10" BorderThickness="1" BorderBrush="LightGray">
-            <StackPanel>
-                <Label Content="Vm property 1"/>
-                <TextBox Text="{Binding VmProperty1, Delay=300, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="Vm property 2"/>
-                <TextBox Text="{Binding VmProperty2, Delay=300, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-        </GroupBox>
+            <GroupBox Grid.Row="0" Header=" ViewModel properties " Padding="5" Margin="0,10" BorderThickness="1" BorderBrush="LightGray">
+                <StackPanel>
+                    <Label Content="Vm property 1"/>
+                    <TextBox Text="{Binding VmProperty1, Delay=300, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Content="Vm property 2"/>
+                    <TextBox Text="{Binding VmProperty2, Delay=300, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </GroupBox>
 
-        <GroupBox Grid.Row="1" Header="Model properties" Padding="5" Margin="0,10" BorderThickness="1" BorderBrush="LightGray">
-            <StackPanel>
-                <Label Content="First name"/>
-                <TextBox Text="{Binding Model.FirstName, Delay=300, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="Last name"/>
-                <TextBox Text="{Binding Model.LastName, Delay=300, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="Email"/>
-                <TextBox Text="{Binding Model.Email, Delay=300, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-        </GroupBox>
+            <GroupBox Grid.Row="1" Header="Model properties" Padding="5" Margin="0,10" BorderThickness="1" BorderBrush="LightGray">
+                <StackPanel>
+                    <Label Content="First name"/>
+                    <TextBox Text="{Binding Model.FirstName, Delay=300, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Content="Last name"/>
+                    <TextBox Text="{Binding Model.LastName, Delay=300, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Content="Email"/>
+                    <TextBox Text="{Binding Model.Email, Delay=300, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </GroupBox>
 
-        <GroupBox Grid.Row="2" Header="Errors" Padding="5" Margin="0,10" >
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Errors}" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Key" Binding="{Binding Key}" Width="80"/>
-                    <DataGridTextColumn Header="Property" Binding="{Binding PropertyName}" Width="150"/>
-                    <DataGridTemplateColumn Header="Messages" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <ItemsControl ItemsSource="{Binding ErrorMessages}"  />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
+            <GroupBox Grid.Row="2" Header="Errors" Padding="5" Margin="0,10" >
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Errors}" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Key" Binding="{Binding Key}" Width="80"/>
+                        <DataGridTextColumn Header="Property" Binding="{Binding PropertyName}" Width="150"/>
+                        <DataGridTemplateColumn Header="Messages" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ItemsControl ItemsSource="{Binding ErrorMessages}"  />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
 
-        <Border Background="LightGray" Grid.Row="0" Grid.RowSpan="3" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.4">
-            <TextBlock Text="{Binding BusyContent}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" Foreground="Red"/>
-        </Border>
+            <Border Background="LightGray" Grid.Row="0" Grid.RowSpan="3" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.4">
+                <TextBlock Text="{Binding BusyContent}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" Foreground="Red"/>
+            </Border>
 
-    </Grid>
+        </Grid>
+    </AdornerDecorator>
+    
 </UserControl>

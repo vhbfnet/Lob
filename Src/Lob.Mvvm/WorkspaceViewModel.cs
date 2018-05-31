@@ -156,6 +156,7 @@ namespace Lob.Mvvm
         protected virtual void OnViewLoaded()
         {
             ViewLoaded?.Invoke(this, EventArgs.Empty);
+            LoadCommand.Execute();
         }
 
         #endregion

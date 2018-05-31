@@ -3,8 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:WpfApp"
         xmlns:views="clr-namespace:WpfApp.Views"
         xmlns:uc="clr-namespace:WpfApp.Controls"
+        mc:Ignorable="d" 
+        d:DataContext="{d:DesignInstance vm:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Height="800" Width="1000">
 
     <Grid>

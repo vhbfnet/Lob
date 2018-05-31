@@ -6,37 +6,39 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp.Services;
 
 namespace WpfApp.ViewModels
 {
+    /// <summary>
+    /// Customer list view model
+    /// </summary>
+    /// <seealso cref="Lob.Mvvm.ListViewModel{Crm.Business.Entities.Customer}" />
     public class CustomerListViewModel : ListViewModel<Customer>
     {
+        private readonly ICustomerServiceProvider _customerServiceProvider;
+
         public CustomerListViewModel()
         {
             ViewTitle = "Customer list view";
+            _customerServiceProvider = Singleton<CustomerServiceProvider>.Instance; // TODO : Inject this by DI
         }
 
         protected async override Task Load()
         {
-            await GetData();
-            await base.Load();
+            // Load here referentials data
+            await Refresh();
         }
 
         protected async override Task Refresh()
         {
-            await GetData();
+            await GetCustomers();
             await base.Refresh();
         }
 
-        private async Task GetData()
+        private async Task GetCustomers()
         {
-            await Task.Delay(3000);
-
-            var list = new ObservableCollection<Customer>();
-            list.Add(new Customer { FirstName = "Victor", LastName = "BAPTISTA" });
-            list.Add(new Customer { FirstName = "Hugo", LastName = "DE FREITAS" });
-
-            Items = list;
+            Items = await _customerServiceProvider.GetAllCustomerAsync();
         }
     }
 }
