@@ -72,6 +72,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CustomerSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,9 +97,13 @@
     <Compile Include="Services\CustomerServiceProvider.cs" />
     <Compile Include="Services\ICustomerServiceProvider.cs" />
     <Compile Include="Singleton.cs" />
+    <Compile Include="ViewModels\CustomerSearchViewModel.cs" />
     <Compile Include="ViewModels\CustomerListViewModel.cs" />
     <Compile Include="Views\CustomerListView.xaml.cs">
       <DependentUpon>CustomerListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerSearchView.xaml.cs">
+      <DependentUpon>CustomerSearchView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomerView.xaml.cs">
       <DependentUpon>CustomerView.xaml</DependentUpon>

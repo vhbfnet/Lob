@@ -11,16 +11,16 @@ using WpfApp.Services;
 namespace WpfApp.ViewModels
 {
     /// <summary>
-    /// Customer list view model
+    /// Customer search view model
     /// </summary>
-    /// <seealso cref="Lob.Mvvm.ListViewModel{Crm.Business.Entities.Customer}" />
-    public class CustomerListViewModel : ListViewModel<Customer>
+    /// <seealso cref="Lob.Mvvm.SearchViewModel{Crm.Business.Entities.Customer, Crm.Business.Entities.Customer}" />
+    public class CustomerSearchViewModel : SearchViewModel<Customer, Customer>
     {
         private readonly ICustomerServiceProvider _customerServiceProvider;
 
-        public CustomerListViewModel()
+        public CustomerSearchViewModel()
         {
-            ViewTitle = "List customers";
+            ViewTitle = "Search customers";
             _customerServiceProvider = Singleton<CustomerServiceProvider>.Instance; // TODO : Inject this by DI
         }
 
@@ -32,8 +32,13 @@ namespace WpfApp.ViewModels
 
         protected async override Task Refresh()
         {
+            await Search();
+        }
+
+        protected async override Task Search()
+        {
             await GetCustomers();
-            await base.Refresh();
+            await base.Search();
         }
 
         private async Task GetCustomers()

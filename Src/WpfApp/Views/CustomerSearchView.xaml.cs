@@ -1,11 +1,7 @@
-﻿using Lob.Mvvm;
-using Prism.Commands;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,18 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp.ViewModels;
 
-namespace WpfApp
+namespace WpfApp.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CustomerSearchView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CustomerSearchView : UserControl
     {
-        public MainWindow()
+        public CustomerSearchView()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            DataContext = new CustomerSearchViewModel();
         }
     }
 }

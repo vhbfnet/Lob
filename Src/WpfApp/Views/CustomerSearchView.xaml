@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="WpfApp.Views.CustomerSearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:WpfApp.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance vm:CustomerSearchViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ViewLoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <AdornerDecorator>
+        <Grid Margin="20,30,20,10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="190"/>
+            </Grid.RowDefinitions>
+
+            <GroupBox Grid.Row="0" Header=" Customers " Padding="5" Margin="0,10" BorderThickness="1" BorderBrush="LightGray">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Items}" SelectedItem="{Binding CurrentItem, Mode=TwoWay}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}" Width="100" />
+                        <DataGridTextColumn Header="Last" Binding="{Binding LastName}" Width="100" />
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="100" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1" Header="Errors" Padding="5" Margin="0,10" >
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Errors}" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Key" Binding="{Binding Key}" Width="80"/>
+                        <DataGridTextColumn Header="Property" Binding="{Binding PropertyName}" Width="150"/>
+                        <DataGridTemplateColumn Header="Messages" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ItemsControl ItemsSource="{Binding ErrorMessages}"  />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+
+            <Border Background="LightGray" Grid.Row="0" Grid.RowSpan="2" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.4">
+                <TextBlock Text="{Binding BusyContent}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" Foreground="Red"/>
+            </Border>
+
+        </Grid>
+    </AdornerDecorator>
+
+</UserControl>

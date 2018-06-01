@@ -6,6 +6,7 @@
         xmlns:vm="clr-namespace:WpfApp"
         xmlns:views="clr-namespace:WpfApp.Views"
         xmlns:uc="clr-namespace:WpfApp.Controls"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         mc:Ignorable="d" 
         d:DataContext="{d:DesignInstance vm:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Height="800" Width="1000">
@@ -19,10 +20,17 @@
         <uc:ActionControl Grid.Row="0"/>
 
         <TabControl x:Name="tab" Grid.Row="1" BorderThickness="0,1,0,0"
-                    ItemContainerStyle="{StaticResource TabViewItemStyle}"
-                    SelectionChanged="TabControl_SelectionChanged">
+                    ItemContainerStyle="{StaticResource TabViewItemStyle}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItem.Content.DataContext, ElementName=tab}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <TabItem>
                 <views:CustomerListView />
+            </TabItem>
+            <TabItem>
+                <views:CustomerSearchView />
             </TabItem>
             <TabItem>
                 <views:CustomerView />

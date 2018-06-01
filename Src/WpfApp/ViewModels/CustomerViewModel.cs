@@ -34,7 +34,7 @@ namespace WpfApp.ViewModels
 
         public CustomerViewModel()
         {
-            ViewTitle = "Customer view";
+            ViewTitle = "Customer";
             _customerServiceProvider = Singleton<CustomerServiceProvider>.Instance; // TODO : Inject this by DI
         }
 
